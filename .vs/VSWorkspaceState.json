@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\obj"
   ],
-  "SelectedNode": "\\Backend.csproj",
+  "SelectedNode": "\\obj\\project.assets.json",
   "PreviewInSolutionExplorer": false
 }
