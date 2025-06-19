@@ -1,5 +1,0 @@
-C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\obj\Release\net9.0\Backend.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\obj\Release\net9.0\Backend.AssemblyInfoInputs.cache
-C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\obj\Release\net9.0\Backend.AssemblyInfo.cs
-C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\obj\Release\net9.0\Backend.csproj.CoreCompileInputs.cache
-C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\obj\Release\net9.0\Backend.MvcApplicationPartsAssemblyInfo.cache
