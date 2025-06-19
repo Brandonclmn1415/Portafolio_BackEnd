@@ -2,28 +2,24 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copia solo el archivo del proyecto
-COPY Backend.csproj ./
-
-# Restauramos dependencias
-RUN dotnet restore
-
-# Copiamos el resto del proyecto
+# Copiar todos los archivos (y luego restaurar)
 COPY . ./
 
-# Compilamos y publicamos
-RUN dotnet build -c Release --no-restore
-RUN dotnet publish -c Release -o /app/out --no-restore
+# Restaurar dependencias
+RUN dotnet restore
+
+# Compilar y publicar
+RUN dotnet publish -c Release -o /app/out
 
 # ---------- Etapa de runtime ----------
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# Copiamos el resultado de la etapa de build
+# Copiar artefactos publicados
 COPY --from=build /app/out .
 
-# Exponemos el puerto por defecto de ASP.NET
+# Exponer el puerto
 EXPOSE 80
 
-# Arranque de la aplicación
+# Ejecutar la app
 ENTRYPOINT ["dotnet", "Backend.dll"]
