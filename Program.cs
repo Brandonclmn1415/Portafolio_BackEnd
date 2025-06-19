@@ -15,12 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNetlify", policy =>
-    { 
+    {
         policy.WithOrigins("https://portafoliobrandonclmn1415.netlify.app")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();
-    }
+    });
 });
 
 var app = builder.Build();
@@ -28,7 +28,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())
+    app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 }
 else
 {
