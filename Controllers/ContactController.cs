@@ -42,7 +42,7 @@ namespace Portafolio.Controllers
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress(fromEmail),
-                    Subject = $"Mensaje de contacto: {model.Subject}",
+                    Subject = $"Mensaje de contacto: {model.Subject ?? "Sin asunto"}",
                     Body = $"Email: {model.Email}\n\nMensaje:\n{model.Message}",
                     IsBodyHtml = false
                 };
