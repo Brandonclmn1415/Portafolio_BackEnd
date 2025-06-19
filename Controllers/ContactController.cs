@@ -46,9 +46,12 @@ namespace Portafolio.Controllers
                 Console.WriteLine($"EnableSsl: {enableSsl}");
                 Console.WriteLine("FromEmail:"+ _configuration["SmtpSettings:FromEmail"]);
 
-                if (string.IsNullOrWhiteSpace(fromEmail) || string.IsNullOrWhiteSpace(toEmail) || string.IsNullOrWhiteSpace(smtpUser)) 
+                if (string.IsNullOrWhiteSpace(fromEmail)|| 
+                    string.IsNullOrWhiteSpace(toEmail) || 
+                    string.IsNullOrWhiteSpace(smtpUser) ||
+                    string.IsNullOrWhiteSpace(smtpPass)) 
                 {
-                    return StatusCode(500, new { message = "Configuración SMTP incompleta", fromEmail, toEmail, smtpUser });
+                    return StatusCode(500, new { message = "Configuración SMTP incompleta", fromEmail, toEmail, smtpUser , smtpPass});
                 }
 
 
