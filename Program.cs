@@ -53,8 +53,9 @@ app.Use(async (context, next) =>
         await next();
 
         if (context.Response.StatusCode == 404 &&
-            !context.Request.Path.Value.StartsWith("./api") &&
-            !Path.HasExtension(context.Request.Path.Value))
+            context.Request.Path.Value is string path &&
+            !path.StartsWith("./api") &&
+            !Path.HasExtension(path))
         {
             context.Request.Path = "/index.html";
             await next();

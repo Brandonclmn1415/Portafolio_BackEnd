@@ -28,23 +28,16 @@ namespace Portafolio.Controllers
 
             try
             {
-                var fromEmail = Environment.GetEnvironmentVariable("SmtpSettings__FromEmail");
-                var toEmail = Environment.GetEnvironmentVariable("SmtpSettings__ToEmail");
-                var smtpUser = Environment.GetEnvironmentVariable("SmtpSettings__Username");
-                var smtpPass = Environment.GetEnvironmentVariable("SmtpSettings__Password");
-                var smtpHost = Environment.GetEnvironmentVariable("SmtpSettings__Host");
-                var smtpPort = int.Parse(Environment.GetEnvironmentVariable("SmtpSettings__Port") ?? "587");
-                var enableSsl = bool.Parse(Environment.GetEnvironmentVariable("SmtpSettings__EnableSsl") ?? "true");
+                var smtpSettings = _configuration.GetSection("SmtpSettings");
 
+                var fromEmail = smtpSettings["FromEmail"];
+                var toEmail = smtpSettings["ToEmail"];
+                var smtpUser = smtpSettings["Username"];
+                var smtpPass = smtpSettings["Password"];
+                var smtpHost = smtpSettings["Host"];
+                var smtpPort = int.Parse(smtpSettings["Port"] ?? "587");
+                var enableSsl = bool.Parse(smtpSettings["EnableSsl"] ?? "true");
 
-                Console.WriteLine($"FROM: {fromEmail}");
-                Console.WriteLine($"TO: {toEmail}");
-                Console.WriteLine($"USER: {smtpUser}");
-                Console.WriteLine($"PASS: {smtpPass}");
-                Console.WriteLine($"HOST: {smtpHost}");
-                Console.WriteLine($"PORT: {smtpPort}");
-                Console.WriteLine($"EnableSsl: {enableSsl}");
-                Console.WriteLine("FromEmail:"+ _configuration["SmtpSettings:FromEmail"]);
 
                 if (string.IsNullOrWhiteSpace(fromEmail)|| 
                     string.IsNullOrWhiteSpace(toEmail) || 
@@ -52,6 +45,7 @@ namespace Portafolio.Controllers
                     string.IsNullOrWhiteSpace(smtpPass)) 
                 {
                     return StatusCode(500, new { message = "Configuración SMTP incompleta", fromEmail, toEmail, smtpUser , smtpPass});
+                    return StatusCode(500, new { message = "From config ->" + _configuration["SmtpSettings:FromEmail"]});
                 }
 
 
@@ -94,9 +88,9 @@ namespace Portafolio.Controllers
 
     public class ContactFormModel
     {
-        public string Email { get; set; }
-        public string Subject { get; set; }
-        public string Message { get; set; }
+        public required string Email { get; set; }
+        public required string Subject { get; set; }
+        public required string Message { get; set; }
     }
 };
 
