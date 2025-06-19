@@ -28,14 +28,13 @@ namespace Portafolio.Controllers
 
             try
             {
-                var smtpSettings = _configuration.GetSection("SmtpSettings");
-                var fromEmail = smtpSettings["FromEmail"];
-                var toEmail = smtpSettings["ToEmail"];
-                var smtpHost = smtpSettings["Host"];
-                var smtpPort = smtpSettings.GetValue<int>("Port");
-                var smtpUser = smtpSettings["Username"];
-                var smtpPass = smtpSettings["Password"];
-                var enableSsl = smtpSettings.GetValue<bool>("EnableSsl");
+                var fromEmail = Environment.GetEnvironmentVariable("SmtpSettings__FromEmail");
+                var toEmail = Environment.GetEnvironmentVariable("SmtpSettings__ToEmail");
+                var smtpHost = Environment.GetEnvironmentVariable("SmtpSettings__Host");
+                var smtpPort = int.Parse(Environment.GetEnvironmentVariable("SmtpSettings__Port") ?? "587");
+                var smtpUser = Environment.GetEnvironmentVariable("SmtpSettings__Username");
+                var smtpPass = Environment.GetEnvironmentVariable("SmtpSettings__Password");
+                var enableSsl = bool.Parse(Environment.GetEnvironmentVariable("SmtpSettings__EnableSsl") ?? "true");
 
 
                 Console.WriteLine($"FROM: {fromEmail}");
