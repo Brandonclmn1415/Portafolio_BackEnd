@@ -30,16 +30,20 @@ namespace Portafolio.Controllers
             {
                 var fromEmail = Environment.GetEnvironmentVariable("SmtpSettings__FromEmail");
                 var toEmail = Environment.GetEnvironmentVariable("SmtpSettings__ToEmail");
-                var smtpHost = Environment.GetEnvironmentVariable("SmtpSettings__Host");
-                var smtpPort = int.Parse(Environment.GetEnvironmentVariable("SmtpSettings__Port") ?? "587");
                 var smtpUser = Environment.GetEnvironmentVariable("SmtpSettings__Username");
                 var smtpPass = Environment.GetEnvironmentVariable("SmtpSettings__Password");
+                var smtpHost = Environment.GetEnvironmentVariable("SmtpSettings__Host");
+                var smtpPort = int.Parse(Environment.GetEnvironmentVariable("SmtpSettings__Port") ?? "587");
                 var enableSsl = bool.Parse(Environment.GetEnvironmentVariable("SmtpSettings__EnableSsl") ?? "true");
 
 
                 Console.WriteLine($"FROM: {fromEmail}");
                 Console.WriteLine($"TO: {toEmail}");
                 Console.WriteLine($"USER: {smtpUser}");
+                Console.WriteLine($"PASS: {smtpPass}");
+                Console.WriteLine($"HOST: {smtpHost}");
+                Console.WriteLine($"PORT: {smtpPort}");
+                Console.WriteLine($"EnableSsl: {enableSsl}");
                 Console.WriteLine("FromEmail:"+ _configuration["SmtpSettings:FromEmail"]);
 
                 if (string.IsNullOrWhiteSpace(fromEmail) || string.IsNullOrWhiteSpace(toEmail) || string.IsNullOrWhiteSpace(smtpUser)) 
