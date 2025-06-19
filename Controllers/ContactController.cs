@@ -37,7 +37,17 @@ namespace Portafolio.Controllers
                 var smtpPass = smtpSettings["Password"];
                 var enableSsl = smtpSettings.GetValue<bool>("EnableSsl");
 
+
+                Console.WriteLine($"FROM: {fromEmail}");
+                Console.WriteLine($"TO: {toEmail}");
+                Console.WriteLine($"USER: {smtpUser}");
                 Console.WriteLine("FromEmail:"+ _configuration["SmtpSettings:FromEmail"]);
+
+                if (string.IsNullOrWhiteSpace(fromEmail) || string.IsNullOrWhiteSpace(toEmail) || string.IsNullOrWhiteSpace(smtpUser)) 
+                {
+                    return StatusCode(500, new { message = "Configuración SMTP incompleta", fromEmail, toEmail, smtpUser });
+                }
+
 
                 var mailMessage = new MailMessage
                 {
@@ -74,6 +84,7 @@ namespace Portafolio.Controllers
             }
         }        
     }
+
 
     public class ContactFormModel
     {
