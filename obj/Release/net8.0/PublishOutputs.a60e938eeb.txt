@@ -1,0 +1,8 @@
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\Backend.exe
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\appsettings.Development.json
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\appsettings.json
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\package-lock.json
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\Backend.dll
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\Backend.deps.json
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\Backend.runtimeconfig.json
+C:\Users\brand\OneDrive\Desktop\Portafolio_Brandon_Vega\Portafolio\Backend\out\Backend.pdb

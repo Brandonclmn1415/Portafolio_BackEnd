@@ -1,7 +1,1 @@
 .vs/
-bin/
-obj/
-*.db
-*.suo
-*.user
-*.vsidx
