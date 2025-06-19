@@ -12,20 +12,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowNetlify", policy =>
+    { 
+        policy.WithOrigins("https://portafoliobrandonclmn1415.netlify.app")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    }
+});
 
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors(builder => builder
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+    app.UseDeveloperExceptionPage();
+    app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())
 }
 else
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
+    app.UseCors("AllowNetlify");
 }
 
 app.UseHttpsRedirection();
