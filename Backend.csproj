@@ -5,18 +5,4 @@
   </PropertyGroup>
 
 
-  <Target Name="PublishRunVite" AfterTargets="ComputeFilesToPublish">
-    <Exec WorkingDirectory="$(ProjectDir)Frontend" Command="npm install"/>
-    <Exec WorkingDirectory="$(ProjectDir)Frontend" Command="npm run build"/>
-    <ItemGroup>
-      <DistFiles Include="$(ProjectDir)Frontend\dist/**/*" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')"
-                              Exclude="@(ResolvedFileToPublish)">
-        <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </ResolvedFileToPublish>
-    </ItemGroup>
-  </Target>
-
-
 </Project>
