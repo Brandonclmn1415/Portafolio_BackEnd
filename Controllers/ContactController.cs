@@ -50,7 +50,7 @@ namespace Portafolio.Controllers
                 };
 
                 using var client = new SmtpClient();
-                await client.ConnectAsync(smtpHost, smtpPort, MailKit.Security.SecurseSocketOptions.StartTls);
+                await client.ConnectAsync(smtpHost, smtpPort, MailKit.Security.SecureSocketOptions.StartTls);
                 await client.AuthenticateAsync(smtpUser, smtpPass);
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
