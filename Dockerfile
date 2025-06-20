@@ -4,6 +4,7 @@ WORKDIR /app
 
 # Copiamos el archivo del proyecto
 COPY Backend.csproj ./
+COPY appsettings.json ./
 
 # Restauramos paquetes
 RUN dotnet restore
