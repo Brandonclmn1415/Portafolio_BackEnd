@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
-using System.Net.Mail;
+using MailKit.Net.Smtp;
+using MimeKit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -38,39 +39,23 @@ namespace Portafolio.Controllers
                 var smtpPort = int.Parse(smtpSettings["Port"] ?? "587");
                 var enableSsl = bool.Parse(smtpSettings["EnableSsl"] ?? "true");
 
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Portafolio", fromEmail));
+                message.To.Add(MailboxAddress.Parse(toEmail));
+                message.Subject = model.Subject;
 
-                if (string.IsNullOrWhiteSpace(fromEmail)|| 
-                    string.IsNullOrWhiteSpace(toEmail) || 
-                    string.IsNullOrWhiteSpace(smtpUser) ||
-                    string.IsNullOrWhiteSpace(smtpPass)) 
+                message.Body = new TextPart("plain")
                 {
-                    return StatusCode(500, new { message = "Configuración SMTP incompleta", fromEmail, toEmail, smtpUser , smtpPass});
-                    return StatusCode(500, new { message = "From config ->" + _configuration["SmtpSettings:FromEmail"]});
-                }
-
-
-                var mailMessage = new MailMessage
-                {
-                    From = new MailAddress(fromEmail),
-                    Subject = $"Mensaje de contacto: {model.Subject ?? "Sin asunto"}",
-                    Body = $"Email: {model.Email}\n\nMensaje:\n{model.Message}",
-                    IsBodyHtml = false
+                    Text = $"Email: {model.Email}\n\nMessage:\n{model.Message}"
                 };
 
-                mailMessage.To.Add(toEmail);
+                using var client = new SmtpClient();
+                await client.ConnectAsync(smtpHost, smtpPort, MailKit.Security.SecurseSocketOptions.StartTls);
+                await client.AuthenticateAsync(smtpUser, smtpPass);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
 
-                using (var client = new SmtpClient(smtpHost, smtpPort))
-                {
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential(smtpUser, smtpPass);
-                    client.EnableSsl = enableSsl;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-                    await client.SendMailAsync(mailMessage);
-                    Console.WriteLine("Email enviado con exito.");
-                }
-
-                return Ok(new { message = "Mensaje enviado con exito" });
+                return Ok(new {message = "Mensaje enviado con exito"});
             }
             catch (Exception ex)
             {
