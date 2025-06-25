@@ -7,13 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Update="appsettings.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="MailKit" Version="4.12.1" />
+		<PackageReference Include="Google.Apis.Gmail.v1" Version="1.63.0.3223" />
+		<PackageReference Include="Google.Apis.Auth" Version="1.64.0" />
+		<PackageReference Include="MimeKit" Version="4.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
 	</ItemGroup>
 
 </Project>
+
